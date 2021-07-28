@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 
 class MyDataset(Dataset):
 
-    def __init__(self):
+    def __init__(self, path):
         super().__init__()
 
         self.transforms = transforms.Compose([
@@ -16,8 +16,8 @@ class MyDataset(Dataset):
             transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
             #transforms.RandomErasing(),
         ])
-
-        self.set_imgPaths()
+        path = os.path.join(path,"pics")
+        self.set_imgPaths(path)
         self.set_imgs()
         self.set_labels()
 
@@ -30,8 +30,7 @@ class MyDataset(Dataset):
     def __len__(self):
         return len(self.labels)
 
-    def set_imgPaths(self):
-        path = r"./dataset/pics"
+    def set_imgPaths(self, path):
         self.img_paths = os.listdir(path)
         self.img_paths.sort()
         for i in range(len(self.img_paths)):
