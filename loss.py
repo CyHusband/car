@@ -8,7 +8,7 @@ class MyLoss(nn.Module):
     def forward(self, pre, target):
         cls_pre = pre[:, 0]
         cls_tar = target[:, 0]
-        cls_loss = F.binary_cross_entropy(F.sigmoid(cls_pre), cls_tar)
+        cls_loss = F.binary_cross_entropy(cls_pre, cls_tar)
 
         box_pre = pre[:, 1:]
         box_tar = target[:, 1:]

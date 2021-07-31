@@ -50,5 +50,7 @@ for epoch_i in range(1, epoch+1):
     if(total_loss<flag):
         flag = total_loss
         torch.save(network, "./weight/best.pth")
+    if(epoch_i%20 == 0):
+        torch.save(network, "./weight/last.pth")
  
 torch.save(network, "./weight/last.pth")
