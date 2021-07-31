@@ -12,4 +12,5 @@ class Car(nn.Module):
 
     def forward(self, x):
         out = self.resnet(x)
+        out = out.sigmoid()
         return out
