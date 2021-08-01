@@ -14,7 +14,7 @@ class MyDataset(Dataset):
             transforms.Resize((224, 224)),
             transforms.ToTensor(),
             transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
-            #transforms.RandomErasing(),
+            transforms.RandomErasing(),
         ])
         path = os.path.join(path,"pics")
         self.set_imgPaths(path)
@@ -53,7 +53,7 @@ class MyDataset(Dataset):
                 label = torch.tensor(label)
                 self.labels.append(label)        
             else:
-                label = torch.tensor([0, 1,1,1,1])
+                label = torch.tensor([0., 1.,1.,1.,1.])
                 self.labels.append(label)        
 
     def get_label(self, xml_name):
@@ -74,4 +74,4 @@ class MyDataset(Dataset):
         width = (xmax-xmin) / pic_width
         height = (ymax-ymin) / pic_height
 
-        return [1, x_center,y_center,width,height]
+        return [1., x_center,y_center,width,height]

@@ -15,16 +15,17 @@ class MyLoss(nn.Module):
         box_loss = self.giou_loss(box_pre, box_tar)
         box_loss = (1 - box_loss) * cls_tar
 
-        loss = (cls_loss + box_loss.mean()) / 2
+        loss = 0.05*cls_loss + 0.95*box_loss.mean()
         return loss
 
     def giou_loss(self, box1, box2, eps=1e-12):
     
-        #xywh
+        #xywh -> xyxy
         b1_x1, b1_x2 = box1[:,0] - box1[:,2] / 2, box1[:,0] + box1[:,2] / 2 + eps
         b1_y1, b1_y2 = box1[:,1] - box1[:,3] / 2, box1[:,1] + box1[:,3] / 2 + eps
         b2_x1, b2_x2 = box2[:,0] - box2[:,2] / 2, box2[:,0] + box2[:,2] / 2 + eps
         b2_y1, b2_y2 = box2[:,1] - box2[:,3] / 2, box2[:,1] + box2[:,3] / 2 + eps
+
 
         # Intersection area
         inter = (torch.min(b1_x2, b2_x2) - torch.max(b1_x1, b2_x1)).clamp(0) * \
