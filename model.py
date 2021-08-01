@@ -7,7 +7,8 @@ class Car(nn.Module):
         super(Car, self).__init__()
         self.resnet = models.resnet50(pretrained=True)
         for p in self.parameters():
-            p.requires_grad = False
+            #p.requires_grad = False
+            pass
         self.resnet.fc = nn.Linear(2048, 5, bias=True)
 
     def forward(self, x):
