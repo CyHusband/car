@@ -14,7 +14,8 @@ class MyDataset(Dataset):
             transforms.Resize((224, 224)),
             transforms.ToTensor(),
             transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
-            transforms.RandomErasing(),
+            #train.py used randomerasing, test.py didn't use randomerasing
+            #transforms.RandomErasing(),
         ])
         path = os.path.join(path,"pics")
         self.set_imgPaths(path)
