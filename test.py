@@ -39,7 +39,7 @@ def get_iou(box1, box2, eps=1e-12, thresthold=0.5):
 
 print("dataloading...")
 begin = time.time()
-trainset = dataset_test.MyDataset("./dataset/trainset")
+trainset = dataset_test.MyDataset("./dataset/testset")
 trainset = DataLoader(trainset, batch_size=50, shuffle=True)
 end = time.time()
 print("dataload success! costing total time:", end-begin,"s")

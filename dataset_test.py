@@ -38,7 +38,7 @@ class MyDataset(Dataset):
     def set_imgs(self):
         self.imgs = []
         for img_path in self.img_paths:
-            img = Image.open(img_path)
+            img = Image.open(img_path).convert('RGB')
             img = self.transforms(img)
             self.imgs.append(img)
     
