@@ -39,8 +39,10 @@ def get_iou(box1, box2, eps=1e-12, thresthold=0.5):
 
 print("dataloading...")
 begin = time.time()
-trainset = dataset_test.MyDataset("./dataset/testset")
-trainset = DataLoader(trainset, batch_size=50, shuffle=True)
+dir_data = "./dataset/trainset"
+dir_data = "./dataset/testset"
+trainset = dataset_test.MyDataset(dir_data)
+trainset = DataLoader(trainset, batch_size=2, shuffle=True)
 end = time.time()
 print("dataload success! costing total time:", end-begin,"s")
 
@@ -51,6 +53,7 @@ for imgs, labels in trainset:
     imgs, labels = imgs.cuda(), labels.cuda()
     out = network(imgs)
     count += get_pre_count(out, labels)
-print(count)
 
+total = len(os.listdir(os.path.join(dir_data,"pics")))
+print("precision:",int(count),"/",total," = ", int(count)/total)
 
