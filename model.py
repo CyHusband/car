@@ -38,6 +38,7 @@ class TransformerEncoderLayer_(nn.Module):
     def __init__(self, d_model, nhead, d_out=5, dropout=0.1):
         super(TransformerEncoderLayer_, self).__init__()
         self.self_attn = nn.MultiheadAttention(d_model, nhead, dropout=dropout)
+        self.self_attn2 = nn.MultiheadAttention(d_model, nhead, dropout=dropout)
         # Implementation of Feedforward model
         self.linear = nn.Linear(d_model, d_out)
         self.dropout = nn.Dropout(dropout)
@@ -59,6 +60,8 @@ class TransformerEncoderLayer_(nn.Module):
         src2 = self.self_attn(src, src, src, attn_mask=src_mask,
                               key_padding_mask=src_key_padding_mask)[0]
         src = src + self.dropout(src2)
-        src = self.norm(src)
-        #src = self.linear(src)
+        #src = self.norm(src)
+        #src = self.self_attn2(src, src, src, attn_mask=src_mask,
+        #                      key_padding_mask=src_key_padding_mask)[0]
+        #src = self.norm(src)
         return src
