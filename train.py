@@ -34,7 +34,7 @@ optimizer = torch.optim.SGD(filter(lambda p:p.requires_grad, network.parameters(
 my_loss = loss.MyLoss()
 #my_loss = nn.MSELoss()
 
-step_size = int(epoch * 0.4)
+step_size = int(epoch * 0.3)
 scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=0.1 )
 for epoch_i in range(1, epoch+1):
     total_loss = 0 
